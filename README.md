@@ -1,19 +1,29 @@
+
 # Kubernetes Ansible Deployment
 
-This project automates the deployment of a Kubernetes cluster using Ansible.
+Original credit for this project does not belong to me, forked
+[cemakpolat/ansible-kubernetes](https://github.com/cemakpolat/ansible-kubernetes)
+
+This project automates the deployment of a Kubernetes cluster using
+Ansible.
 
 ## Cluster Information
 
-- **Master Node**: kube-controller 
+- **Master Node**: kube-controller
 - **Worker Node 1**: kube-node-1
 - **Worker Node 2**: kube-node-2
 
 ## Prerequisites
 
 1. **Ansible installed** on your control machine:
-   ```bash
-   sudo apt update && sudo apt install ansible -y
-   ```
+
+In my case this is macOS, there's no official brew install command on
+the Ansible docs, and that's really unfortunate, but this package
+seems to be trusted
+
+```bash
+brew install ansible
+```
 
 2. **SSH access** to all nodes with sudo privileges
 3. **SSH key** configured for passwordless access
@@ -22,19 +32,22 @@ This project automates the deployment of a Kubernetes cluster using Ansible.
 ## Quick Start
 
 1. **Test connectivity**:
+
    ```bash
    ansible all -m ping
    ```
 
 2. **Deploy the cluster**:
+
    ```bash
    ./deploy.sh
    ```
+
    or single ansible deployment
+
    ```bash
    ansible-playbook site.yml
    ```
-
 
 3. **Access your cluster**:
    ```bash
@@ -59,7 +72,7 @@ ansible-playbook playbooks/01-prepare-nodes.yml
 # Setup master
 ansible-playbook playbooks/02-setup-master.yml
 
-# Setup workers  
+# Setup workers
 ansible-playbook playbooks/03-setup-workers.yml
 ```
 
@@ -72,6 +85,7 @@ ansible-playbook playbooks/03-setup-workers.yml
 ## Health Status
 
 Run the health status script:
+
 ```bash
 ./health.sh
 ```
@@ -98,3 +112,4 @@ k8s-ansible/
 ├── deploy-step-by-step.sh
 └── troubleshoot.sh
 ```
+
